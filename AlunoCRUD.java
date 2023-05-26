@@ -13,58 +13,160 @@ import java.util.List;
 import java.util.Scanner;
 
 public class AlunoCRUD {
-    private static List<Aluno> alunos = new ArrayList<>();
-    private static Scanner scanner = new Scanner(System.in);
+   
+    private static Scanner sc = new Scanner(System.in);
+    private static ArrayList<String> Alunos = new ArrayList<>();
 
     public static void main(String[] args) {
-        int opcao = 0;
 
+        int menu = 0;
         do {
-            System.out.println("Menu de Opções:");
-            System.out.println("1. Criar aluno");
-            System.out.println("2. Editar aluno");
-            System.out.println("3. Excluir aluno");
-            System.out.println("4. Listar alunos");
-            System.out.println("5. Sair");
-            System.out.print("Escolha uma opção: ");
+            System.out.println("Menu de opÃ§Ãµes");
+            System.out.println("1 - Criar Alunos");
+            System.out.println("2 - Editar Alunos");
+            System.out.println("3 - Excluir Alunos");
+            System.out.println("4 - Listar Alunos");
+            System.out.println("5 - Buscar Aluno");
+            System.out.print("Escolha uma dessas opÃ§Ãµes: ");
 
-            opcao = scanner.nextInt();
-            scanner.nextLine(); // Limpar o buffer do scanner
-
-            switch (opcao) {
+            menu = sc.nextInt();
+            sc.nextLine();
+            switch (menu) {
                 case 1:
-                    criarAluno();
+                    criarAlunos();
                     break;
+
                 case 2:
-                    editarAluno();
+                    editarAlunos();
                     break;
+
                 case 3:
-                    excluirAluno();
+                    excluirAlunos();
                     break;
+                    
                 case 4:
                     listarAlunos();
                     break;
+                    
                 case 5:
-                    System.out.println("Encerrando o programa...");
+                    buscarAlunos();
                     break;
+
                 default:
-                    System.out.println("Opção inválida! Tente novamente.");
+                    System.out.println("OpÃ§Ã£o invÃ¡lida");
+
             }
-        } while (opcao != 5);
+
+        } while (menu != 5);
+
     }
 
-    private static void criarAluno() {
-        System.out.print("Digite o nome do aluno: ");
-        String nome = scanner.nextLine();
+   private static void criarAlunos() {
+    System.out.println("Digite o nome do Aluno: ");
+    String nome = sc.nextLine();
+    System.out.println("Digite a idade do Aluno: ");
+    String idade = sc.nextLine();
+    System.out.println("Digite o curso do Aluno: ");
+    String curso = sc.nextLine();
+    System.out.println("Digite o semestre do Aluno: ");
+    String semestre = sc.nextLine();
+    System.out.println("Digite a matricula do Aluno: ");
+    String matricula = sc.nextLine();
+    System.out.println("Digite o email do Aluno: ");
+    String email = sc.nextLine();
+    System.out.println("Digite o telefone do Aluno: ");
+    String telefone = sc.nextLine();
+    
+    String dadosAluno = "Nome: " + nome + ", Idade: " + idade + ", Curso: " + curso + ", Semestre: " + semestre + ", Matricula: " + matricula + ", Email: " + email + ", Telefone: " + telefone;
+    Alunos.add(dadosAluno);
+    
+    System.out.println("Aluno criado com sucesso!");
+}
 
-        System.out.print("Digite o registro do aluno: ");
-        String registro = scanner.nextLine();
 
-        Aluno aluno = new Aluno(nome, registro);
-        alunos.add(aluno);
+   private static void editarAlunos() {
+    System.out.println("Digite a matricula do Aluno que deseja editar: ");
+    String matricula = sc.nextLine();
+    boolean alunoEncontrado = false;
 
-        System.out.println("Aluno criado com sucesso!");
+    for (int i = 0; i < Alunos.size(); i++) {
+        String dadosAluno = Alunos.get(i);
+        if (dadosAluno.contains("Matricula: " + matricula)) {
+            System.out.println("Digite o novo nome do Aluno: ");
+            String novoNome = sc.nextLine();
+            System.out.println("Digite a nova idade do Aluno: ");
+            String novaIdade = sc.nextLine();
+            System.out.println("Digite o novo curso do Aluno: ");
+            String novoCurso = sc.nextLine();
+            System.out.println("Digite o novo semestre do Aluno: ");
+            String novoSemestre = sc.nextLine();
+            System.out.println("Digite o novo email do Aluno: ");
+            String novoEmail = sc.nextLine();
+            System.out.println("Digite o novo telefone do Aluno: ");
+            String novoTelefone = sc.nextLine();
+            String novoDadosAluno = "Nome: " + novoNome + ", Idade: " + novaIdade + ", Curso: " + novoCurso + ", Semestre: " + novoSemestre + ", Matricula: " + matricula + ", Email: " + novoEmail + ", Telefone: " + novoTelefone;
+            Alunos.set(i, novoDadosAluno);
+            alunoEncontrado = true;
+            System.out.println("Aluno editado com sucesso!");
+            break;
+        }
     }
+
+    if (!alunoEncontrado) {
+        System.out.println("Aluno nÃ£o encontrado.");
+    }
+}
+
+    private static void excluirAlunos() {
+        System.out.println("Digite a matricula do Aluno que deseja excluir: ");
+        String matricula = sc.nextLine();
+        boolean alunoEncontrado = false;
+
+        for (int i = 0; i < Alunos.size(); i++) {
+            String dadosAluno = Alunos.get(i);
+            if (dadosAluno.contains("Matricula: " + matricula)) {
+                Alunos.remove(i);
+                alunoEncontrado = true;
+                System.out.println("Aluno excluido com sucesso!");
+                break;
+            }
+        }
+
+        if (!alunoEncontrado) {
+            System.out.println("Aluno nÃ£o encontrado.");
+        }
+    }
+
+    private static void listarAlunos() {
+        if (Alunos.isEmpty()) {
+            System.out.println("Não ha, alunos cadastrados.");
+        } else {
+            System.out.println("Lista de Alunos:");
+            for (String aluno : Alunos) {
+                System.out.println(aluno);
+            }
+        }
+    }
+
+    private static void buscarAlunos() {
+        System.out.println("Digite a matricula do Aluno que deseja buscar: ");
+        String matricula = sc.nextLine();
+        boolean alunoEncontrado = false;
+
+        for (String dadosAluno : Alunos) {
+            if (dadosAluno.contains("Matricula: " + matricula)) {
+                System.out.println("Aluno encontrado:");
+                System.out.println(dadosAluno);
+                alunoEncontrado = true;
+                break;
+            }
+        }
+
+        if (!alunoEncontrado) {
+            System.out.println("Aluno nÃ£o encontrado.");
+        }
+    }
+}
 
     private static void editarAluno() {
         System.out.print("Digite o registro do aluno que deseja editar: ");
