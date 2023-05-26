@@ -21,13 +21,13 @@ public class AlunoCRUD {
 
         int menu = 0;
         do {
-            System.out.println("Menu de opÃ§Ãµes");
+            System.out.println("Menu de opções");
             System.out.println("1 - Criar Alunos");
             System.out.println("2 - Editar Alunos");
             System.out.println("3 - Excluir Alunos");
             System.out.println("4 - Listar Alunos");
             System.out.println("5 - Buscar Aluno");
-            System.out.print("Escolha uma dessas opÃ§Ãµes: ");
+            System.out.print("Escolha uma dessas opções: ");
 
             menu = sc.nextInt();
             sc.nextLine();
@@ -53,7 +53,7 @@ public class AlunoCRUD {
                     break;
 
                 default:
-                    System.out.println("OpÃ§Ã£o invÃ¡lida");
+                    System.out.println("Opção invalida");
 
             }
 
